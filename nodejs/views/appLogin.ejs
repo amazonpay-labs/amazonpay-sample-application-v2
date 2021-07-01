@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" class="gr__s3-ap-northeast-1_amazonaws_com">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0">
+    <meta name="google" content="notranslate" />
+</head>
+
+<body data-gr-c-s-loaded="true">
+
+    <div class="container">
+    
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+            <h1 class="my-4">Amazon Payでの支払い処理を実行します。</h1>
+
+            <div id="AmazonPayButton"></div>
+        </div>
+    </div>
+
+
+<script src="https://static-fe.payments-amazon.com/checkout.js"></script>
+<script type="text/javascript" charset="utf-8">
+    amazon.Pay.renderButton('#AmazonPayButton', {
+        merchantId: '<%= merchantId %>',
+        ledgerCurrency: 'JPY', // Amazon Pay account ledger currency
+        sandbox: true, // dev environment
+        checkoutLanguage: 'ja_JP', // render language
+        productType: 'PayAndShip', // checkout type
+        placement: 'Other', // button placement
+        buttonColor: 'Gold',
+        createCheckoutSessionConfig: {
+            payloadJSON: '<%- JSON.stringify(payload) %>', // string generated in step 2
+            signature: '<%= signature %>', // signature generated in step 3
+            publicKeyId: '<%= publicKeyId %>' 
+        }
+    });
+</script>
+
+</body>
+</html>
